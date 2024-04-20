@@ -38,7 +38,7 @@ export class UsersController {
 
     @Put(":id")
     updateUser(@Param("id") id: string, @Body() updateUserDto: UpdateUserDto) {
-        return `User ${updateUserDto.fullname} with id: ${id} has been updated`;
+        return this.usersSevice.updateUser(+id, updateUserDto);
     }
 
     @Delete(":id")

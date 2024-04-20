@@ -1,5 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { CreateUserDto } from "./dto/create-user.dto";
+import { UpdateUserDto } from "./dto/update-user.dto";
 
 @Injectable()
 export class UsersService {
@@ -32,7 +33,16 @@ export class UsersService {
         return newUser;
     }
 
-    updateUser() {}
+    updateUser(id: number, updateUserDto: UpdateUserDto) {
+        this.users = this.users.map((user) => {
+            if (user.id === id) {
+                return { ...user, ...updateUserDto };
+            }
+            return user;
+        });
+        return this.getUser(id);
+    }
+
     deleteUser(id: number) {
         const deletedUser = this.getUser(id);
         this.users = this.users.filter((user) => user.id !== id);
