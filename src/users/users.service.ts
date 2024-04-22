@@ -5,9 +5,36 @@ import { UpdateUserDto } from "./dto/update-user.dto";
 @Injectable()
 export class UsersService {
     private users = [
-        { id: 0, fullname: "KrisSab", isEmployed: false, job: "none" },
-        { id: 1, fullname: "Clar1k", isEmployed: true, job: "fullstack" },
-        { id: 2, fullname: "Durkil", isEmployed: false, job: "none" },
+        {
+            id: 0,
+            username: "KrisSab",
+            firstName: "Kristian",
+            lastName: "Sab",
+            email: "kris@example.com",
+            phoneNumber: "1112223344",
+            isEmployed: false,
+            job: "none",
+        },
+        {
+            id: 1,
+            username: "Clar1k",
+            firstName: "Serhii",
+            lastName: "Clar",
+            email: "serhii@example.com",
+            phoneNumber: "2221114455",
+            isEmployed: true,
+            job: "fullstack",
+        },
+        {
+            id: 2,
+            username: "Durkil",
+            firstName: "Jekas",
+            lastName: "Shark",
+            email: "shark@example.com",
+            phoneNumber: "3332226677",
+            isEmployed: false,
+            job: "none",
+        },
     ];
 
     getUsers(isEmployed?: boolean) {
@@ -24,6 +51,7 @@ export class UsersService {
         return user;
     }
 
+    //* Можна додати користувача не вказавши всі поля, що є в CreateUserDto!
     createUser(createUserDto: CreateUserDto) {
         const newUser = {
             id: Date.now(),
@@ -33,6 +61,7 @@ export class UsersService {
         return newUser;
     }
 
+    //* Можна додати поле, якого не мало би бути в юзера за дефолтом, через те що UpdateUserDto можна розширити!
     updateUser(id: number, updateUserDto: UpdateUserDto) {
         this.users = this.users.map((user) => {
             if (user.id === id) {
